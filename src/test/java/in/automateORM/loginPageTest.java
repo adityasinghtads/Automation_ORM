@@ -9,6 +9,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class loginPageTest 
 {
 	private WebDriver driver;
@@ -16,11 +18,10 @@ public class loginPageTest
 	@BeforeMethod
 	public void setUp() {
 		
-		System.setProperty("webdriver.edge.driver","D:\\DSA\\msedgedriver.exe");
+		WebDriverManager.edgedriver().setup();
 		driver = new EdgeDriver();
 		driver.get("https://opensource-demo.orangehrmlive.com/");
 		driver.manage().window().maximize();
-		
 	}
 	
 	// -------------------- Perform Login -------------------- // 
