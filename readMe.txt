@@ -7,3 +7,4 @@ Website Link - https://opensource-demo.orangehrmlive.com/web/index.php/auth/logi
 
 Modules covered will be updated here
 1. Login Test Cases
+2. Logout Test case

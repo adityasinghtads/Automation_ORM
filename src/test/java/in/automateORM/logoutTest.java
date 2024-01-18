@@ -1,5 +1,7 @@
 package in.automateORM;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,20 +20,18 @@ private WebDriver driver;
 		WebDriverManager.edgedriver().setup();
 		driver = new EdgeDriver();
 		driver.get("https://opensource-demo.orangehrmlive.com/");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	@Test 
 	public void logout() {
 		
 		loginPageTest aa =  new loginPageTest();
-		
 		aa.performLogin("admin", "admin123", driver);
-		aa.tryCatchBlock();
 		
 		WebElement iconDrop = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[2]/ul/li/span/i"));
-		aa.tryCatchBlock();
+		
 		iconDrop.click();
-		aa.tryCatchBlock();
 		WebElement logoutOption = driver.findElement(By.partialLinkText("Log"));
 		logoutOption.click();
 		
@@ -45,6 +45,13 @@ private WebDriver driver;
 		if(driver!=null) {
 			driver.quit();
 		}
+	}
+	
+	/*----Improvement Point----- */
+	
+	public void explicitWaitFunction() {
+		// Creating this as we need to improve to explicit wait as it will give better control over.
+		// To be implemented in future. 
 	}
 	
 }
