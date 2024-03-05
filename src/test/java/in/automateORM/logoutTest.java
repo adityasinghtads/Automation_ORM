@@ -26,7 +26,7 @@ private WebDriver driver;
 	@Test 
 	public void logout() {
 		
-		loginPageTest aa =  new loginPageTest();
+		BaseClass aa =  new BaseClass();
 		aa.performLogin("admin", "admin123", driver);
 		
 		WebElement iconDrop = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[2]/ul/li/span/i"));
