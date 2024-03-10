@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class BaseClass {
+
+	//private loginPage login = new loginPage();
 	
 	// ############ Perform Login Function ###############
 	
@@ -20,4 +22,5 @@ public class BaseClass {
 		loginButton.click();
 
 	}
+
 }

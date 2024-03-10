@@ -11,6 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import in.automateORM.BaseClass;
 import in.automateORM.loginPage;
 import in.automateORM.loginPageTest;
 import in.automateORM.sideMenuTest;
@@ -19,7 +20,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Admin_UserMangementTest {
 	
 	private WebDriver driver;
-	loginPageTest login = new loginPageTest();
+	BaseClass login = new BaseClass();
 	sideMenuTest navigate = new sideMenuTest();	
 	
 	// *********** To be moved to base class ***********
