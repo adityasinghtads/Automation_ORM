@@ -16,7 +16,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class sideMenuTest {
 	
 	private WebDriver driver;
-	loginPageTest login = new loginPageTest();
+	BaseClass login = new BaseClass();
 	
 	@BeforeClass
 	public void setUp() {
