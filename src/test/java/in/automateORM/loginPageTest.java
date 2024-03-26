@@ -33,7 +33,7 @@ public class loginPageTest
 	// --------------------- Positive Cases ------------------ // 
 
 	@Test(priority = 1)
-	private void normalLogin1(){
+	public void normalLogin1(){
 		lp.enterUsername("admin");
 		lp.enterPassword("admin123");
 		lp.clickSubmit();

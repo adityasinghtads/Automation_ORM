@@ -3,9 +3,7 @@ package in.automateORM;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -17,11 +15,14 @@ public class sideMenuTest {
 	
 	private WebDriver driver;
 	BaseClass login = new BaseClass();
+	private sideMenu sideMenu;
+
 	
 	@BeforeClass
 	public void setUp() {
 		WebDriverManager.edgedriver().setup();
 		driver = new EdgeDriver();
+		sideMenu = new sideMenu(driver);
 		driver.get("https://opensource-demo.orangehrmlive.com/");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -30,31 +31,24 @@ public class sideMenuTest {
 	
 	@Test(priority=1)
 	public void default_sideMenuOpen() {
-		WebElement checkMenu = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[8]/a/span"));
-		Assert.assertTrue("Unable to open Side Menu Bar ", checkMenu.isDisplayed());
-		
+		Assert.assertTrue("Unable to open Side Menu Bar ",driver.findElement(sideMenu.checkMenu).isDisplayed());
 	}
 	
 	 @Test(priority=2)
 	public void searchInSideMenu() {
-		 
-		 WebElement searchOption = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/div/div/input"));
-		 searchOption.sendKeys("Performance");
-		 WebElement clickPerf = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li/a/span"));
-		 clickPerf.click();
-		 String currentUrl = driver.getCurrentUrl();
-		 Assert.assertTrue("Not redirected",currentUrl.contains("performance/searchEvaluatePerformanceReview"));
-		 driver.navigate().back();
-		 
+
+		sideMenu.enterSearchOption("Performance");
+		sideMenu.clickOption();
+		Assert.assertTrue("Not redirected",driver.getCurrentUrl().contains(sideMenu.performanceUrl));
+		driver.navigate().back();
+
 	}
 	 @Test(priority=3)
 	public void openSideMenu() {
 		 	
-			WebElement openSideMenu =  driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/div/div/button/i"));
-			openSideMenu.click();
-			//Click to open the side menu 
-			openSideMenu.click();
-			//Click to close the side menu
+			sideMenu.clickOpenSideMenu();
+			sideMenu.clickOpenSideMenu();
+
 	}
 	 
 	@AfterClass
@@ -63,5 +57,4 @@ public class sideMenuTest {
 			driver.quit();
 		}
 	}
-	 
 }

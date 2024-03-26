@@ -12,6 +12,8 @@ public class loginPage {
         this.driver = driver;
     }
 
+    public String loginUrl = "web/index.php/auth/login";
+
     // Web Elements - Login Creds
     public final By userField = By.name("username");
     public final By passwordField = By.name("password");
