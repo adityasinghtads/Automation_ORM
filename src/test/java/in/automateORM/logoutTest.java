@@ -3,9 +3,7 @@ package in.automateORM;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,31 +11,32 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 public class logoutTest {
+
 private WebDriver driver;
+private logoutPage logout;
+private loginPage login;
 	
 	@BeforeMethod
 	public void setUp() {
 		WebDriverManager.edgedriver().setup();
 		driver = new EdgeDriver();
+		logout = new logoutPage(driver);
+		login = new loginPage(driver);
 		driver.get("https://opensource-demo.orangehrmlive.com/");
+		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	@Test 
 	public void logout() {
 		
-		BaseClass aa =  new BaseClass();
-		aa.performLogin("admin", "admin123", driver);
+		login.enterUsername("Admin");
+		login.enterPassword("admin123");
+		login.clickSubmit();
+		logout.clickIconDropdown();
+		logout.clickLogoutOption();
+		Assert.assertTrue("Logout failed !",driver.getCurrentUrl().contains(login.loginUrl));	
 		
-		WebElement iconDrop = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[1]/div[2]/ul/li/span/i"));
-		
-		iconDrop.click();
-		WebElement logoutOption = driver.findElement(By.partialLinkText("Log"));
-		logoutOption.click();
-		
-		String currentURL = driver.getCurrentUrl();
-		Assert.assertTrue("Logout failed !",currentURL.contains("web/index.php/auth/login"));
-	
 	}
 	
 	@AfterMethod
@@ -45,13 +44,6 @@ private WebDriver driver;
 		if(driver!=null) {
 			driver.quit();
 		}
-	}
-	
-	/*----Improvement Point----- */
-	
-	public void explicitWaitFunction() {
-		// Creating this as we need to improve to explicit wait as it will give better control over.
-		// To be implemented in future. 
 	}
 	
 }
